@@ -1,4 +1,4 @@
-/*
+﻿/*
 Дано множество целых чисел из [0..10^9] размера n.
 Используя алгоритм поиска k-ой порядковой статистики, требуется найти следующие параметры множества:
 10%  перцентиль
@@ -109,7 +109,7 @@ void unit_test_simple() {
     assert(KPosition<T>(arr, p10, 0, n - 1) == 2);
     assert(KPosition<T>(arr, median, 0, n - 1) == 6);
     assert(KPosition<T>(arr, p90, 0, n - 1) == 10);
-    std::cout << "test simple OK" << "\n";
+    std::cout << "test 1 OK" << "\n";
     int shared_mas[10] = { 7,3,5,2,10,4,6,9,1,8 };
     for (int i = 0; i < n; i++) {
         arr[i] = shared_mas[i];
@@ -117,7 +117,7 @@ void unit_test_simple() {
     assert(KPosition<T>(arr, p10, 0, n - 1) == 2);
     assert(KPosition<T>(arr, median, 0, n - 1) == 6);
     assert(KPosition<T>(arr, p90, 0, n - 1) == 10);
-    std::cout << "test shared simple OK" << "\n";
+    std::cout << "test 1 shared OK" << "\n";
 }
 
 // Тест на массиве {1 .. 11}
@@ -136,7 +136,7 @@ void unit_test_2() {
     assert(KPosition<T>(arr, p10, 0, n - 1) == 2);
     assert(KPosition<T>(arr, median, 0, n - 1) == 6);
     assert(KPosition<T>(arr, p90, 0, n - 1) == 10);
-    std::cout << "test 2 simple OK" << "\n";
+    std::cout << "test 2 OK" << "\n";
     int shared_mas[11] = { 7,11,3,5,2,10,4,6,9,1,8 };
     for (int i = 0; i < n; i++) {
         arr[i] = shared_mas[i];
@@ -144,11 +144,13 @@ void unit_test_2() {
     assert(KPosition<T>(arr, p10, 0, n - 1) == 2);
     assert(KPosition<T>(arr, median, 0, n - 1) == 6);
     assert(KPosition<T>(arr, p90, 0, n - 1) == 10);
-    std::cout << "test 2 shared simple OK" << "\n";
+    std::cout << "test 2 shared OK" << "\n";
 }
 
 int main()
-{
+{   
+    unit_test_simple<int>();
+    unit_test_2<int>();
     int n = 0;
     std::cin >> n;
     array<int> arr(n);
@@ -156,10 +158,11 @@ int main()
     int median = n / 2;
     int p90 = (n * 9) / 10;
     int p10 = (n * 1) / 10;
-    unit_test_simple<int>();
-    unit_test_2<int>();
-    std::cout << KPosition<int>(arr, p10, 0, n - 1) << "\n";
-    std::cout << KPosition<int>(arr, median, 0, n - 1) << "\n";
-    std::cout << KPosition<int>(arr, p90, 0, n - 1);
+    int Elem_p10 = KPosition<int>(arr, p10, 0, n - 1);
+    int Elem_median = KPosition<int>(arr, median, 0, n - 1);
+    int Elem_p90 = KPosition<int>(arr, p90, 0, n - 1);
+    std::cout << Elem_p10 << "\n";
+    std::cout << Elem_median << "\n";
+    std::cout << Elem_p90;
     return 0;
 }
