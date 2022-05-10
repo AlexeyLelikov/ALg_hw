@@ -3,8 +3,6 @@
 
 template<class T>
 T max(T a, T b) { return a > b ? a : b; }
-template<class T>
-T min(T a, T b) { return a < b ? a : b; }
 
 template<class T>
 struct Node {
@@ -185,6 +183,7 @@ public:
 				HeapSort();
 				m_heap.changeid(arr.getid(i),K - 1);
 				m_heap.changevalue(arr.getvalue(i), K - 1);
+				max_el = max<T>(max_el, arr.getvalue(i));
 			}
 		}
 		for (int i = lenght / 2 - 1; i >= 0; i--)
@@ -206,10 +205,57 @@ T* KmaxElementofHeap(Heap<T>& heap,int K) {
 	return result;
 }
 
+void unit_test() { // тест из контеста (с выводом 80 1 100)
+	// ввод
+	// 100 36
+	// 80 3
+	// 1 5
+	int mas_id[3] = { 100, 80, 1 };
+	int mas_value[3] = { 36, 3, 5 };
+	vector<int> arr(3);
+	for (int i = 0; i < 3; ++i)
+	{
+		arr.push_back(mas_id[i], mas_value[i]);
+	}
+	Heap<int> heap(arr, 3);
+	int* result = KmaxElementofHeap(heap,3);
+	int answer[3] = { 80,1,100 };
+	for (int i = 0; i < 3; ++i) {
+		assert(result[i] == answer[i]);
+	}
+	delete[] result;
+	std::cout << "Test1 OK" << "\n";
+}
+
+void unit_test_2() { // тест  (с выводом 3 1 5)
+	// ввод 
+	// 4 3
+	// 1 532
+	// 3 123
+	// 5 8493
+	// 2 12
+	int mas_id[4] = { 1, 3, 5, 2 };
+	int mas_value[4] = { 532, 123, 8493, 12 };
+	vector<int> arr(4);
+	for (int i = 0; i < 3; ++i)
+	{
+		arr.push_back(mas_id[i], mas_value[i]);
+	}
+	Heap<int> heap(arr, 4);
+	int* result = KmaxElementofHeap(heap,3);
+	int answer[3] = { 3,1,5 };
+	for (int i = 0; i < 3; ++i) {
+		assert(result[i] == answer[i]);
+	}
+	delete[] result;
+	std::cout << "Test2 OK" << "\n";
+}
 
 
 int main()
 {
+	unit_test();
+	unit_test_2();
 	int N = 0;
 	std::cin >> N;
 	int K = 0;
